@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import ThemeToggler from '@/components/own/ThemeToggler.vue'
+import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
+import AppSidebar from "@/components/own/AppSidebar.vue";
 </script>
 
 <template>
-  <ThemeToggler />
+  <SidebarProvider>
+    <AppSidebar />
+    <main>
+      <router-view />
+    </main>
+  </SidebarProvider>
 </template>
