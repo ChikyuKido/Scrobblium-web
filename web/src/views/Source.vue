@@ -44,7 +44,6 @@ const sourceData: SourceData[] = [
 </script>
 
 <template>
-  <SourcePopup/>
   <div class="container py-10 mx-auto">
     <SourceDataTable :columns="sourceColumns" :data="sourceData" />
   </div>

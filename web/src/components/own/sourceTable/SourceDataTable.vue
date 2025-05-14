@@ -1,24 +1,20 @@
 <script setup lang="ts" generic="TData, TValue">
 import {ArrowLeft, ArrowRight} from "lucide-vue-next"
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from '@/components/ui/table'
-import {Input} from '@/components/ui/input'
 import {Button} from '@/components/ui/button'
 
 import {
-  ColumnFiltersState,
+  type ColumnDef,
   FlexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  SortingState,
+  type SortingState,
   useVueTable,
 } from '@tanstack/vue-table'
 import {valueUpdater} from '@/lib/utils'
 import {ref} from "vue";
-import {
-  Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,
-} from '@/components/ui/select'
+import SourcePopup from "@/components/own/sourceTable/SourcePopup.vue";
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
@@ -81,26 +77,34 @@ const table = useVueTable({
       </TableBody>
     </Table>
   </div>
-  <div class="flex items-center justify-center py-4 space-x-2">
-    <Button
-        variant="outline"
-        size="sm"
-        :disabled="!table.getCanPreviousPage()"
-        @click="table.previousPage()"
-    >
-      <component :is="ArrowLeft"/>
-    </Button>
-    <div class="flex items-center justify-center text-sm font-medium">
-      {{ table.getState().pagination.pageIndex + 1 }} of
-      {{ table.getPageCount() }}
+  <div class="relative py-4">
+    <!-- Right-aligned button -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2">
+      <SourcePopup />
     </div>
-    <Button
-        variant="outline"
-        size="sm"
-        :disabled="!table.getCanNextPage()"
-        @click="table.nextPage()"
-    >
-      <component :is="ArrowRight"/>
-    </Button>
+
+    <!-- Centered paginator -->
+    <div class="flex items-center justify-center space-x-2">
+      <Button
+          variant="outline"
+          size="sm"
+          :disabled="!table.getCanPreviousPage()"
+          @click="table.previousPage()"
+      >
+        <component :is="ArrowLeft" />
+      </Button>
+      <div class="flex items-center justify-center text-sm font-medium">
+        {{ table.getState().pagination.pageIndex + 1 }} of
+        {{ table.getPageCount() }}
+      </div>
+      <Button
+          variant="outline"
+          size="sm"
+          :disabled="!table.getCanNextPage()"
+          @click="table.nextPage()"
+      >
+        <component :is="ArrowRight" />
+      </Button>
+    </div>
   </div>
 </template>
