@@ -21,7 +21,7 @@ const items = [
   },
   {
     title: "List",
-    url: "/recentList",
+    url: "/list",
     icon: ListIcon,
   },
   {

@@ -5,9 +5,12 @@ import AppSidebar from "@/components/own/AppSidebar.vue";
 
 <template>
   <SidebarProvider>
-    <AppSidebar />
-    <main>
-      <router-view />
-    </main>
+    <div class="flex h-screen w-screen overflow-hidden">
+      <AppSidebar class="w-64 shrink-0" />
+      <main class="flex-1 overflow-auto">
+        <router-view />
+      </main>
+    </div>
   </SidebarProvider>
 </template>
+
