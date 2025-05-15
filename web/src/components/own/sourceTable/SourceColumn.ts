@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import type {ColumnDef} from "@tanstack/vue-table";
 import type {SourceData} from "@/dto/SourceData.ts";
-import { ArrowUpDown, ChevronDown } from 'lucide-vue-next'
+import { ArrowUpDown } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 
 export const sourceColumns: ColumnDef<SourceData>[] = [

@@ -67,7 +67,7 @@ function onSubmit(values: { name: string; provider: string }) {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="shadcn" v-bind="componentField" />
+                <Input type="text" placeholder="Enter name..." v-bind="componentField" />
               </FormControl>
               <FormMessage />
             </FormItem>
