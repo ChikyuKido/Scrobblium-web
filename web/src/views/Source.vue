@@ -2,7 +2,7 @@
 
 import SourceDataTable from "@/components/own/sourceTable/SourceDataTable.vue";
 import {sourceColumns} from "@/components/own/sourceTable/SourceColumn.ts";
-import SourcePopup from "@/components/own/sourceTable/SourcePopup.vue";
+
 const sourceData: SourceData[] = [
   {
     name: 'Spotify',

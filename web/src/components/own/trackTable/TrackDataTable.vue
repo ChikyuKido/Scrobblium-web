@@ -15,11 +15,12 @@ import {
   FlexRender,
   getCoreRowModel,
   useVueTable,
-  ColumnFiltersState,
-  SortingState,
+  type ColumnFiltersState,
+  type SortingState,
   getPaginationRowModel,
   getSortedRowModel,
   getFilteredRowModel,
+  type ColumnDef,
 } from '@tanstack/vue-table'
 import { valueUpdater } from '@/lib/utils'
 import {ref} from "vue";
@@ -28,7 +29,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -60,19 +60,24 @@ const table = useVueTable({
 
 <template>
   <div class="flex items-center justify-between py-4">
-    <Input class="max-w-sm" placeholder="Filter emails..."
+    <Input class="max-w-sm" placeholder="Filter tracks..."
            :model-value="table.getColumn('artist')?.getFilterValue() as string"
            @update:model-value="table.getColumn('artist')?.setFilterValue($event)" />
 
     <Select>
       <SelectTrigger>
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue placeholder="Combined by" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">
-            Apple
+          <SelectItem value="artist">
+            Artist
+          </SelectItem>
+          <SelectItem value="album">
+            Album
+          </SelectItem>
+          <SelectItem value="track">
+            Track
           </SelectItem>
         </SelectGroup>
       </SelectContent>
