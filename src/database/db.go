@@ -14,7 +14,7 @@ func Init() {
 	if err != nil {
 		log.Fatal("failed to connect database:", err)
 	}
-	err = db.AutoMigrate(&entity.Album{}, &entity.Artist{}, &entity.Track{})
+	err = db.AutoMigrate(&entity.Album{}, &entity.Artist{}, &entity.Track{}, &entity.Settings{})
 	if err != nil {
 		log.Fatal("failed to migrate database:", err)
 		return

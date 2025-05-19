@@ -3,10 +3,15 @@ package track
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"scrobblium-web/util"
 )
 
 func Add() gin.HandlerFunc {
 	return func(c *gin.Context) {
+
+		if !util.AllowsGuestUser(c, false) {
+			return
+		}
 		var request struct {
 			ID           int64    `json:"id"`
 			MaxProgress  int64    `json:"max_progress"`
