@@ -25,4 +25,5 @@ func initTrackRoutes(r *gin.RouterGroup) {
 func initAuthRoutes(r *gin.RouterGroup) {
 	authGroup := r.Group("/auth")
 	authGroup.POST("/login", auth.Login())
+	authGroup.GET("/isAuthorized/:url", auth.IsAuthorized())
 }

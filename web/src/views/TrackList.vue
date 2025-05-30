@@ -166,6 +166,12 @@ const sampleTrackData: TrackData[] = [
   },
 ]
 
+import {checkAuthorization} from "@/lib/utils.js";
+import {onMounted} from "vue";
+onMounted(async () => {
+  await checkAuthorization('list')
+})
+
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import {onMounted, ref, watch} from 'vue'
 import { Input } from '@/components/ui/input/index.js'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch/index.js'
@@ -42,6 +42,13 @@ watch(
 function resetPassword() {
   alert('Reset password triggered')
 }
+
+
+import {checkAuthorization} from "@/lib/utils.js";
+onMounted(async () => {
+  await checkAuthorization('settings')
+})
+
 </script>
 
 <template>

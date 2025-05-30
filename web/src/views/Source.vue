@@ -40,7 +40,11 @@ const sourceData: SourceData[] = [
     lastScrobble: 1715480000,
   },
 ]
-
+import {checkAuthorization} from "@/lib/utils.js";
+import {onMounted} from "vue";
+onMounted(async () => {
+  await checkAuthorization('sources')
+})
 </script>
 
 <template>

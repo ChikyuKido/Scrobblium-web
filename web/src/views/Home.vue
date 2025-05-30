@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
+import {ref, watch, computed, onMounted} from 'vue'
 import ApexCharts from 'apexcharts'
 import VueApexCharts from 'vue3-apexcharts'
 import StatCard from '@/components/own/StatCard.vue'
@@ -88,6 +88,21 @@ async function fetchDataForRange(range) {
 watch(selectedRange, (newRange) => {
   fetchDataForRange(newRange)
 })
+
+import {checkAuthorization} from "@/lib/utils.js";
+import {useRouter} from "vue-router";
+
+onMounted(async () => {
+  const router = useRouter()
+  const from = router.options.history.state.back || null
+
+  if (from === '/login') {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+  }
+
+  await checkAuthorization('homepage')
+})
+
 </script>
 
 

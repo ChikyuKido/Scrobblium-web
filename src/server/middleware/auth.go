@@ -8,13 +8,13 @@ import (
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		authorizationHeader := c.GetHeader("authorization")
+		authorizationHeader := c.GetHeader("Authorization")
 		if authorizationHeader == "" {
 			c.Set("isGuest", true)
 			c.Next()
 			return
 		}
-		if strings.HasPrefix(authorizationHeader, "Bearer ") {
+		if !strings.HasPrefix(authorizationHeader, "Bearer ") {
 			c.JSON(401, gin.H{
 				"error": "Invalid authorization format",
 			})
@@ -24,10 +24,8 @@ func AuthMiddleware() gin.HandlerFunc {
 		tokenString := authorizationHeader[7:]
 		token, err := util.GetToken(tokenString)
 		if err != nil || !token.Valid {
-			c.JSON(401, gin.H{
-				"error": "Invalid token",
-			})
-			c.Abort()
+			c.Set("isGuest", true)
+			c.Next()
 			return
 		}
 		c.Set("isGuest", false)

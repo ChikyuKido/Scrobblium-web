@@ -7,12 +7,7 @@ import (
 
 // DenyGuestUser return true if the user was guest and return Unauthorized
 func DenyGuestUser(c *gin.Context) bool {
-	guest, exists := c.Get("isGuest")
-	if !exists {
-		log.Fatalln("No isGuest found")
-		return false
-	}
-	guestBool := guest.(bool)
+	guestBool := IsGuestUser(c)
 	if guestBool {
 		c.JSON(401, gin.H{
 			"error": "Unauthorized",
@@ -20,4 +15,13 @@ func DenyGuestUser(c *gin.Context) bool {
 		return true
 	}
 	return false
+}
+func IsGuestUser(c *gin.Context) bool {
+	guest, exists := c.Get("isGuest")
+	if !exists {
+		log.Fatalln("No isGuest found")
+		return false
+	}
+	guestBool := guest.(bool)
+	return guestBool
 }

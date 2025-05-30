@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/own/AppSidebar.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 </script>
 
 <template>
-  <SidebarProvider>
+  <div v-if="route.path === '/login'">
+    <router-view />
+  </div>
+  <SidebarProvider v-else>
     <div class="flex h-screen w-screen overflow-hidden">
       <AppSidebar class="w-64 shrink-0" />
       <main class="flex-1 overflow-auto">
@@ -13,4 +19,3 @@ import AppSidebar from "@/components/own/AppSidebar.vue";
     </div>
   </SidebarProvider>
 </template>
-
