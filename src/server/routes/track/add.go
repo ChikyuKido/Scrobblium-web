@@ -8,8 +8,7 @@ import (
 
 func Add() gin.HandlerFunc {
 	return func(c *gin.Context) {
-
-		if !util.AllowsGuestUser(c, false) {
+		if util.DenyGuestUser(c) {
 			return
 		}
 		var request struct {

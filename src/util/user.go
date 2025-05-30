@@ -5,18 +5,19 @@ import (
 	"log"
 )
 
-func AllowsGuestUser(c *gin.Context, allows bool) bool {
+// DenyGuestUser return true if the user was guest and return Unauthorized
+func DenyGuestUser(c *gin.Context) bool {
 	guest, exists := c.Get("isGuest")
 	if !exists {
 		log.Fatalln("No isGuest found")
 		return false
 	}
 	guestBool := guest.(bool)
-	if guestBool && !allows {
+	if guestBool {
 		c.JSON(401, gin.H{
 			"error": "Unauthorized",
 		})
-		return false
+		return true
 	}
-	return true
+	return false
 }
