@@ -27,7 +27,7 @@ func Login() gin.HandlerFunc {
 			return
 		}
 		password, _ := repo.GetPassword()
-		if util.CheckPasswordHash(loginResponse.Password, password) {
+		if !util.CheckPasswordHash(password, loginResponse.Password) {
 			c.JSON(401, gin.H{
 				"error": "Bad Credentials",
 			})

@@ -11,6 +11,12 @@ var DB *gorm.DB
 
 func Init() {
 	db, err := gorm.Open(sqlite.Open("scrob.db"), &gorm.Config{})
+	_ = db.Exec(`
+		PRAGMA journal_mode=WAL;
+		PRAGMA synchronous=OFF;
+		PRAGMA temp_store=MEMORY;
+		PRAGMA cache_size=10000;
+	`)
 	if err != nil {
 		log.Fatal("failed to connect database:", err)
 	}

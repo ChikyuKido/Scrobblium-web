@@ -14,7 +14,6 @@ func Add() gin.HandlerFunc {
 			return
 		}
 		var request struct {
-			ID           int64    `json:"id"`
 			MaxProgress  int64    `json:"max_progress"`
 			Progress     int64    `json:"progress"`
 			TimeListened int64    `json:"time_listened"`
@@ -65,7 +64,6 @@ func Add() gin.HandlerFunc {
 
 		// Create and save track
 		track := entity.Track{
-			ID:           request.ID,
 			MaxProgress:  request.MaxProgress,
 			Progress:     request.Progress,
 			TimeListened: request.TimeListened,

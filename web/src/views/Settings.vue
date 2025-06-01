@@ -5,26 +5,30 @@ import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch/index.js'
 
 const username = ref('')
+
 const guestAccess = ref({
   homepage: false,
   list: false
 })
 
-const originalState = ref({
-  username: 'elias',
-  guestAccess: {
-    homepage: false,
-    list: false
-  }
-})
-
-// Change detection and sync handler
-function syncSettings() {
-  // Replace with actual API call
+async function syncSettings() {
   console.log('Settings changed, syncing...')
+  try {
+    await axiosInstance({
+      method: 'post',
+      url: '/settings/save',
+      data: {
+        username: username.value,
+        homepageAccess: guestAccess.value.homepage,
+        listAccess: guestAccess.value.list
+      }
+    })
+  } catch (e) {
+    console.error('Failed to sync settings', e)
+  }
 }
 
-// Toggle handlers
+
 function toggleHomepage(val) {
   guestAccess.value.homepage = val
 }
@@ -43,11 +47,30 @@ function resetPassword() {
   alert('Reset password triggered')
 }
 
+async function getSettings() {
+  try {
+    const res = await axiosInstance.get('/settings/get')
+    const data = res.data
+
+    username.value = data.username || ''
+    guestAccess.value = {
+      homepage: data.homepageAccess || false,
+      list: data.listAccess || false,
+    }
+  } catch (e) {
+    console.error('Failed to fetch settings', e)
+  }
+}
+
 
 import {checkAuthorization} from "@/lib/utils.js";
+import axiosInstance from "@/axiosInstance.js";
+import PasswordReset from "@/components/own/PasswordReset.vue";
 onMounted(async () => {
   await checkAuthorization('settings')
+  await getSettings()
 })
+
 
 </script>
 
@@ -63,9 +86,7 @@ onMounted(async () => {
         <Input v-model="username" type="text" class="w-64" />
       </div>
 
-      <Button @click="resetPassword" variant="outline">
-        Reset Password
-      </Button>
+      <PasswordReset/>
     </section>
 
     <section class="space-y-4">
