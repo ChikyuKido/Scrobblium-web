@@ -6,13 +6,13 @@ import { Button } from '@/components/ui/button'
 
 export const trackColumns: ColumnDef<TrackData>[] = [
     {
-        accessorKey: 'artist',
+        accessorKey: 'artists',
         header: ({ column }) =>
             h(Button, {
                 variant: 'ghost',
                 onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
             }, () => ['Artist', h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })]),
-        cell: ({ row }) => h('div', {}, row.getValue('artist')),
+        cell: ({ row }) => h('div', {}, row.getValue('artists')),
     },
     {
         accessorKey: 'album',
@@ -63,7 +63,7 @@ export const trackColumns: ColumnDef<TrackData>[] = [
                 variant: 'ghost',
                 class: 'text-right',
                 onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
-            }, () => ['Listen Time (s)', h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })]),
-        cell: ({ row }) => h('div', { class: 'text-right' }, row.getValue('listenTime')),
+            }, () => ['Listen Time', h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })]),
+        cell: ({ row }) => h('div', { class: 'text-right' }, (row.getValue('listenTime')/60/60).toFixed(2) + "h"),
     },
 ]

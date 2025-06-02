@@ -15,6 +15,24 @@ func GetTracks() ([]entity.Track, error) {
 	err := database.DB.Find(&tracks).Error
 	return tracks, err
 }
+func GetTracksWithAll() ([]entity.Track, error) {
+	var tracks []entity.Track
+	err := database.DB.Preload("Album").Find(&tracks).Error
+	if err != nil {
+		return nil, err
+	}
+
+	for i := range tracks {
+		var artists []entity.Artist
+		err = database.DB.Model(&tracks[i]).Association("Artists").Find(&artists)
+		if err != nil {
+			return nil, err
+		}
+		tracks[i].Artists = artists
+	}
+
+	return tracks, nil
+}
 
 func GetEarliestTrack() (entity.Track, error) {
 	var track entity.Track

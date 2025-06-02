@@ -35,6 +35,7 @@ func Init() {
 func initTrackRoutes(r *gin.RouterGroup) {
 	trackGroup := r.Group("/track")
 	trackGroup.POST("/add", track.Add())
+	trackGroup.GET("/list", track.List())
 }
 func initAuthRoutes(r *gin.RouterGroup) {
 	authGroup := r.Group("/auth")

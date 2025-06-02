@@ -3,180 +3,41 @@
 import TrackDataTable from "@/components/own/trackTable/TrackDataTable.vue";
 import {trackColumns} from "@/components/own/trackTable/TrackColumns.ts";
 
-const sampleTrackData: TrackData[] = [
-  {
-    artist: 'Radiohead',
-    album: 'In Rainbows',
-    track: 'Nude',
-    listenedAt: 1689435600000,
-    listenCount: 12,
-    listenTime: 247,
-  },
-  {
-    artist: 'Daft Punk',
-    album: 'Discovery',
-    track: 'Harder, Better, Faster, Stronger',
-    listenedAt: 1689522000000,
-    listenCount: 20,
-    listenTime: 224,
-  },
-  {
-    artist: 'Nirvana',
-    album: 'Nevermind',
-    track: 'Smells Like Teen Spirit',
-    listenedAt: 1689608400000,
-    listenCount: 18,
-    listenTime: 301,
-  },
-  {
-    artist: 'Kendrick Lamar',
-    album: 'DAMN.',
-    track: 'HUMBLE.',
-    listenedAt: 1689694800000,
-    listenCount: 25,
-    listenTime: 177,
-  },
-  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },
-  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },  {
-    artist: 'Billie Eilish',
-    album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
-    track: 'bad guy',
-    listenedAt: 1689781200000,
-    listenCount: 30,
-    listenTime: 194,
-  },
-]
+const trackData = ref({})
+
+
 
 import {checkAuthorization} from "@/lib/utils.js";
-import {onMounted} from "vue";
+import {onMounted, ref, watch} from "vue";
+import type {TrackData} from "@/dto/TrackData.ts";
+import axiosInstance from "@/axiosInstance.ts";
+
+async function fetchData() {
+  try {
+    const res = await axiosInstance.get('/track/list?combine='+selectedCombine.value)
+    const data = res.data
+    trackData.value = data as TrackData[]
+    console.log(trackData.value)
+  } catch (e) {
+    console.error('Failed to fetch settings', e)
+  }
+}
 onMounted(async () => {
   await checkAuthorization('list')
+  await fetchData()
+})
+
+const selectedCombine = ref('track')
+
+watch(selectedCombine, (val) => {
+  fetchData()
 })
 
 </script>
 
 <template>
   <div class="container py-10 mx-auto">
-    <TrackDataTable :columns="trackColumns" :data="sampleTrackData" />
+    <TrackDataTable :columns="trackColumns" :data="trackData" v-model="selectedCombine" />
   </div>
 </template>
 

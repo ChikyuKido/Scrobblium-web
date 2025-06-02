@@ -23,7 +23,7 @@ import {
   type ColumnDef,
 } from '@tanstack/vue-table'
 import { valueUpdater } from '@/lib/utils'
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {
   Select,
   SelectContent,
@@ -36,7 +36,16 @@ import {
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  modelValue: string
 }>()
+
+const emit = defineEmits(['update:modelValue'])
+
+const selected = ref(props.modelValue || '')
+
+watch(selected, (val) => {
+  emit('update:modelValue', val)
+})
 
 const sorting = ref<SortingState>([])
 const columnFilters = ref<ColumnFiltersState>([])
@@ -44,16 +53,23 @@ const columnFilters = ref<ColumnFiltersState>([])
 
 const table = useVueTable({
   get data() { return props.data },
-  get columns() { return props.columns },
+  get columns() {
+    return props.columns
+  },
   getCoreRowModel: getCoreRowModel(),
   getPaginationRowModel: getPaginationRowModel(),
   getSortedRowModel: getSortedRowModel(),
   onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sorting),
   onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFilters),
   getFilteredRowModel: getFilteredRowModel(),
+
   state: {
     get sorting() { return sorting.value },
     get columnFilters() { return columnFilters.value },
+    pagination: {
+      pageIndex: 0,
+      pageSize: 18
+    }
   },
 })
 </script>
@@ -64,7 +80,7 @@ const table = useVueTable({
            :model-value="table.getColumn('artist')?.getFilterValue() as string"
            @update:model-value="table.getColumn('artist')?.setFilterValue($event)" />
 
-    <Select>
+    <Select v-model="selected">
       <SelectTrigger>
         <SelectValue placeholder="Combined by" />
       </SelectTrigger>
@@ -78,6 +94,9 @@ const table = useVueTable({
           </SelectItem>
           <SelectItem value="track">
             Track
+          </SelectItem>
+          <SelectItem value="nothing">
+            Nothing
           </SelectItem>
         </SelectGroup>
       </SelectContent>
